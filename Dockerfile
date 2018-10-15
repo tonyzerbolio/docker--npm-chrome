@@ -1,6 +1,6 @@
-FROM ubuntu:18.04
+FROM ubuntu:latest
 
-LABEL version="1.0.3" \
+LABEL version="1.0.4" \
     description="A Docker instance running the latest Chrome and @angular/cli" \
     maintainer="wraptor@wheezie.be"
 
