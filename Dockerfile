@@ -1,6 +1,6 @@
 FROM node:latest
 
-LABEL version="1.1.0" \
+LABEL version="1.1.1" \
     description="A Docker instance running the latest (stable) Chrome and @angular/cli running on the latest node image." \
     maintainer="wraptor@wheezie.be"
 
