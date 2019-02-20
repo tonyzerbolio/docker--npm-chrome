@@ -1,14 +1,23 @@
-FROM node:latest
+FROM node:11-alpine
 
-LABEL version="1.1.1" \
-    description="A Docker instance running the latest (stable) Chrome and @angular/cli running on the latest node image." \
+LABEL version="1.1.2" \
+    description="A Docker image running the latest (stable) Chrome and @angular/cli running on the node Alpine image v11." \
     maintainer="wraptor@wheezie.be"
 
-RUN apt-get update -y && apt-get install -y wget libxss1 libindicator7 fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libgtk-3-0 libnspr4 libnss3 libx11-xcb1 libxtst6 lsb-release xdg-utils
+ENV CHROME_BIN=/usr/bin/chromium-browser \
+    CHROME_PATH=/usr/lib/chromium/
 
-# Chrome repository
-RUN cd /tmp/
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN dpkg -i ./google-chrome*.deb
-RUN rm ./google-chrome*.deb
-RUN apt-get install -f
+# Installs latest Chromium package.
+RUN echo @edge http://dl-3.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
+    && echo @edge http://dl-3.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
+    && apk add --no-cache \
+    chromium@edge \
+    && rm -rf /var/cache/*
+
+RUN mkdir -p /usr/src/app \
+    && adduser -D chrome \
+    && chown -R chrome:chrome /usr/src/app
+USER chrome
+WORKDIR /usr/src/app
+
+ENTRYPOINT ["chromium-browser", "--headless", "--disable-gpu", "--disable-software-rasterizer", "--disable-dev-shm-usage"]
