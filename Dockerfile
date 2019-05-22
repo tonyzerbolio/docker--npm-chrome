@@ -17,7 +17,7 @@ FROM debian:jessie
 
 RUN set -ex && \
     echo 'deb http://deb.debian.org/debian stretch-backports main' \
-      > /etc/apt/sources.list.d/jessie-backports.list && \
+      > /etc/apt/sources.list.d/stretch-backports.list && \
     apt-get update -y && \
     apt install -t \
       jessie-backports \
