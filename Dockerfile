@@ -13,13 +13,13 @@ RUN dpkg -i ./google-chrome*.deb
 RUN rm ./google-chrome*.deb
 RUN apt-get install -f
 
-FROM debian:jessie
+FROM debian:stretch
 
 RUN set -ex && \
     echo 'deb http://deb.debian.org/debian stretch-backports main' \
-      > /etc/apt/sources.list.d/stretch-backports.list && \
+      > /etc/apt/sources.list.d/backports.list && \
     apt-get update -y && \
-    apt install -t \
-      jessie-backports \
+    apt-get install -t \
+      stretch-backports \
       openjdk-8-jre-headless \
       ca-certificates-java -y
