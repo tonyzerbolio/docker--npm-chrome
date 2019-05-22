@@ -12,3 +12,14 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 RUN dpkg -i ./google-chrome*.deb
 RUN rm ./google-chrome*.deb
 RUN apt-get install -f
+
+FROM debian:jessie
+
+RUN set -ex && \
+    echo 'deb http://deb.debian.org/debian jessie-backports main' \
+      > /etc/apt/sources.list.d/jessie-backports.list && \
+    apt update -y && \
+    apt install -t \
+      jessie-backports \
+      openjdk-8-jre-headless \
+      ca-certificates-java -y
