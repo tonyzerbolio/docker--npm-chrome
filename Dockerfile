@@ -12,14 +12,15 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 RUN dpkg -i ./google-chrome*.deb
 RUN rm ./google-chrome*.deb
 RUN apt-get install -f
-
-FROM debian:stretch
-
-RUN set -ex && \
-    echo 'deb http://deb.debian.org/debian stretch-backports main' \
-      > /etc/apt/sources.list.d/backports.list && \
-    apt-get update -y && \
-    apt-get install -t \
-      stretch-backports \
+RUN apt-get install -t \
       openjdk-8-jre-headless \
       ca-certificates-java -y
+      
+# RUN set -ex && \
+#    echo 'deb http://deb.debian.org/debian stretch-backports main' \
+#      > /etc/apt/sources.list.d/backports.list && \
+#    apt-get update -y && \
+#    apt-get install -t \
+#      stretch-backports \
+#      openjdk-8-jre-headless \
+#      ca-certificates-java -y
