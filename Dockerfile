@@ -1,4 +1,4 @@
-FROM node:11-slim
+FROM node:lts-jessie
 
 LABEL version="1.1.2" \
     description="A Docker instance running the latest (stable) Chrome and @angular/cli running on the latest node image." \
